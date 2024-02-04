@@ -1,31 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Card, CardContent, CardActions, Divider } from '@mui/material'
-import cars from '../cars.json'
+import React from 'react';
+import { Card, CardContent, CardActions, Divider, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import cars from '../cars.json';
 
 const Home = () => {
-    console.log('CARS', cars)
     return (
         <div className="card-container">
-            {cars.map((car, idx) => (
-                <Card key={idx} className="card">
+            {cars.map((car) => (
+                <Card key={car.id} className="card">
                     <CardContent className="text-gray">
-                        <span>{car.Name.toUpperCase()}</span>
+                    <img src={car.ImageUrl} alt={car.Name} style={{ width: '200px', height: '150px', objectFit: 'cover' }} />
+
+                        <h2>{car.Name.toUpperCase()}</h2>
                         <ul>
-                        <li>Miles_per_Gallon: {car["Miles_per_Gallon"]}</li>
-                        <li>Cylinders: {car["Cylinders"]}</li>
-                        <li>Displacement: {car["Displacement"]}</li>
-                        <li>Horsepower: {car["Horsepower"]}</li>
+                            <li>Miles_per_Gallon: {car.Miles_per_Gallon}</li>
+                            <li>Cylinders: {car.Cylinders}</li>
+                            <li>Displacement: {car.Displacement}</li>
+                            <li>Horsepower: {car.Horsepower}</li>
                         </ul>
                     </CardContent>
                     <Divider />
                     <CardActions style={{ color: 'mediumblue' }}>
-                        <Link to={`/car/${car.id}`}>See More Details</Link>
+                        <Link component={RouterLink} to={`/car/${car.id}`}>See More Details</Link>
                     </CardActions>
                 </Card>
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;
